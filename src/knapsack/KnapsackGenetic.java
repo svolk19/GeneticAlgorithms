@@ -22,61 +22,66 @@ public class KnapsackGenetic {
 
     private static final int[] profits = {135, 139, 149, 150, 156, 163, 173, 184, 192, 201, 210, 214, 221, 229, 240};
 
-    public static int getTotalWeight(int[] chrom){
+    public static int getTotalWeight(ArrayList chrom){
         //the total weight of the chromosome representation of a knapsack solution
         int chromWeightTotal = 0;
 
         //add weights for chrom
         for (int i = 0; i < chromLength; i++){
-            if (chrom[i] == 1){
+            if (chrom.get(i).equals(1)){
                 chromWeightTotal += weights[i];
             }
         }
         return chromWeightTotal;
     }
 
-    static int getTotalValue(int[] chrom){
+    private static int getTotalValue(ArrayList chrom){
 
         //the total value of the chromosome representation of a knapsack solution
         int chromValueTotal = 0;
 
         //add values for chrom
         for (int i = 0; i < chromLength; i++){
-            if (chrom[i] == 1){
+            if (chrom.get(i).equals(1)){
                 chromValueTotal += profits[i];
             }
         }
         return chromValueTotal;
     }
 
-    static int[][] fitness(int[][] population){
+    static ArrayList<ArrayList> fitness(ArrayList<ArrayList> population){
 
-        int[][] valueList = new int[population.length][2];
+        //used to rank and store ranked values of population
+        ArrayList<ArrayList> valueList = new ArrayList<>();
+        ArrayList valueListElement = new ArrayList();
 
-        for (int i = 0; i < population.length; i++){
-            if (getTotalWeight(population[i]) > weightCapacity){
-                valueList[i][0] = -1;
-                valueList[i][1] = i;
+        for (int i = 0; i < population.size(); i++){
+            if (getTotalWeight(population.get(i)) > weightCapacity){
+                valueListElement.add(-1);
+                valueListElement.add(i);
+                valueList.add(valueListElement);
             }else{
-                valueList[i][0] = getTotalValue(population[i]);
-                valueList[i][1] = i;
+                valueListElement.add(getTotalValue(population.get(i)));
+                valueListElement.add(i);
+                valueList.add(valueListElement);
+
             }
         }
 
         //indicates whether an element has been switched
-        boolean switchFlag = true;
+        boolean switchFlag;
 
         //sorts the values by switching elements
         while (true) {
             switchFlag = true;
-            for (int i = 0; i < valueList.length - 1; i++) {
-                if (valueList[i][0] < valueList[i + 1][0]) {
+            for (int i = 0; i < valueList.size() - 1; i++) {
+                if ((int) valueList.get(i).get(0) < (int) valueList.get(i + 1).get(0)){
                     switchFlag = false;
-                    int[] smallerValue = valueList[i];
-                    int[] largerValue = valueList[i + 1];
+                    ArrayList smallerValue = valueList.get(i);
+                    ArrayList largerValue = valueList.get(i + 1);
 
-                    valueList[i] = largerValue;
-                    valueList[i + 1] = smallerValue;
+                    valueList.set(i, largerValue);
+                    valueList.set(i + 1, smallerValue);
                 }
             }
             if (switchFlag){
@@ -85,43 +90,46 @@ public class KnapsackGenetic {
         }
 
         //final sorted chrom list
-        int[][] ratedPopList = new int[population.length][chromLength];
+        ArrayList ratedPopList = new ArrayList<>();
 
         //assignes sorted value indexes to chromosomes and places them in final sorted chrom
-        for (int i = 0; i < valueList.length; i++){
-            ratedPopList[i] = population[valueList[i][1]];
+        for (int i = 0; i < valueList.size(); i++){
+            ratedPopList.add(population.get((int) valueList.get(i).get(1)));
         }
 
         return ratedPopList;
 
     }
 
-    static boolean survive(int[] chrom){
+    static boolean survive(ArrayList chrom){
             return getTotalWeight(chrom) > weightCapacity;
     }
 
-    static ArrayList<ArrayList> getScaledFitnesses(int[][] population){
-        int[][] valueList = new int[population.length][2];
+    static ArrayList<ArrayList> getScaledFitnesses(ArrayList<ArrayList> population){
+
+
+        ArrayList<ArrayList> valueList = new ArrayList<>();
+        ArrayList valueListElement = new ArrayList();
+
         int totalPopValue = 0;
-        int chromValue = 0;
+        int chromValue;
 
-
-        for (int i = 0; i < population.length; i++){
-            if (getTotalWeight(population[i]) <= weightCapacity){
-                chromValue = getTotalValue(population[i]);
-                valueList[i][0] = chromValue;
-                valueList[i][1] = i;
+        for (int i = 0; i < population.size(); i++){
+            if (getTotalWeight(population.get(i)) <= weightCapacity){
+                chromValue = getTotalValue(population.get(i));
+                valueListElement.add(chromValue);
+                valueListElement.add(i);
                 totalPopValue += chromValue;
             }
         }
 
         ArrayList<ArrayList> scaledFitnesses = new ArrayList();
-        ArrayList smallArray = new ArrayList();
+        ArrayList scaledFitnessElement = new ArrayList();
 
-        for (int i = 0; i < valueList.length; i++){
-            if (valueList[i][0] != -1){
-                smallArray.add(valueList[i][0] / totalPopValue);
-                smallArray.add(valueList[i][1]);
+        for (int i = 0; i < valueList.size(); i++){
+            if ( ! valueList.get(i).get(0).equals(-1)){
+                scaledFitnessElement.add((double) valueList.get(i).get(0) / (double) totalPopValue);
+                scaledFitnessElement.add(valueList.get(i).get(1));
             }
         }
 

@@ -18,32 +18,35 @@ class Util {
     }
 
     //Stochastically generate an initial population
-    static int[][] generateRandomPop(int popSize, int chromLength){
+    static ArrayList<ArrayList> generateRandomPop(int popSize, int chromLength){
 
         Random rand = new Random();
-        int[][] population = new int[popSize][chromLength];
+        ArrayList<ArrayList> population = new ArrayList<>();
+        ArrayList chrom = new ArrayList();
 
         for (int i = 0; i < popSize; i++){
             for (int j = 0; j < chromLength; j++){
-                population[i][j] = rand.nextInt(2);
+                chrom.add(rand.nextInt(2));
             }
+
+            population.add(chrom);
         }
 
         return population;
     }
 
     //applies a single point crossover on two parents, produces a single offspring
-    static int[] crossover(int[] parentA, int[] parentB){
+    static ArrayList crossover(ArrayList parentA, ArrayList parentB){
 
         Random rand = new Random();
 
-        int[] offspring = new int[parentA.length];
-        int crossLocation =  rand.nextInt(parentA.length);
+        ArrayList offspring = new ArrayList();
+        int crossLocation =  rand.nextInt(parentA.size());
         for (int i = 0; i < crossLocation; i++){
-            offspring[i] = parentA[i];
+            offspring.set(i, parentA.get(i));
         }
-        for (int i = crossLocation; i < parentA.length; i++){
-            offspring[i] = parentB[i];
+        for (int i = crossLocation; i < parentA.size(); i++){
+            offspring.set(i, parentB.get(i));
         }
 
         return offspring;
@@ -51,14 +54,14 @@ class Util {
     }
 
     //applies mutation to new offspring
-    static int[] mutate(int[] offspring, double mutationRate){
+    static ArrayList mutate(ArrayList offspring, double mutationRate){
 
-        for (int i = 0; i < offspring.length; i++){
+        for (int i = 0; i < offspring.size(); i++){
             if (getRandom() < mutationRate){
-                if (offspring[i] == 0){
-                    offspring[i] = 1;
+                if (offspring.get(i).equals(0)){
+                    offspring.set(i, 1);
                 }else{
-                    offspring[i] = 0;
+                    offspring.set(i, 0);
                 }
             }
         }
@@ -85,6 +88,7 @@ class Util {
         int valueIndex = 0;
 
         for (int i = 0; i < wheel.length; i++){
+
             if (randChoice >= wheel[i][0] && randChoice < wheel[i][1]){
                 valueIndex = i;
             }

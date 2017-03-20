@@ -4,6 +4,8 @@
 
 package knapsack;
 
+import java.util.ArrayList;
+
 public class BinaryGeneticAlgorithm {
 
     //define genetic algorithm parameters
@@ -16,7 +18,7 @@ public class BinaryGeneticAlgorithm {
 
 
     //define population
-    private static int[][] population = Util.generateRandomPop(popSize, chromLength);
+    private static ArrayList<ArrayList> population = Util.generateRandomPop(popSize, chromLength);
 
     //define main
     public static void main(String[] args){
@@ -26,48 +28,58 @@ public class BinaryGeneticAlgorithm {
     //GA body method
     private static void runGeneticAlgorithm(){
 
-        int[][] newPop = new int[popSize][chromLength];
+        ArrayList<ArrayList> newPop = new ArrayList<>();
         int genCount = 0;
 
         //GA body
         while (genCount < generations){
-            
+
             //following elitism, copy the most fit individuals into the new population
-            int[][] sortedPop = KnapsackGenetic.fitness(population);
+            ArrayList<ArrayList> sortedPop = KnapsackGenetic.fitness(population);
             for (int i = 0; i < elitism; i ++){
-                newPop[i] = sortedPop[i];
+                newPop.add(i, sortedPop.get(i));
             }
 
             //for adding to the end of the new population later
             int nextIndex = elitism;
 
             //cross until new population is full
-            while (newPop.length != popSize){
+            while (newPop.size() != popSize){
 
                 //select two parents via roulette wheel
-                int[] parentA = population[Util.rouletteSelection(KnapsackGenetic.getScaledFitnesses(population))];
-                int[] parentB = population[Util.rouletteSelection(KnapsackGenetic.getScaledFitnesses(population))];
+                ArrayList parentA = population.get(Util.rouletteSelection(KnapsackGenetic.getScaledFitnesses(population)));
+                ArrayList parentB = population.get(Util.rouletteSelection(KnapsackGenetic.getScaledFitnesses(population)));
 
                 //if parents are the same, try again
-                if (parentA == parentB){
+                if (parentA.equals(parentB)){
                     continue;
                 }
 
                 //maybe cross two parents, evaluated stochastically via roulette wheel selection
                 if (Util.getRandom() < crossRate){
-                    int[] offspring = Util.crossover(parentA, parentB);
+                    ArrayList offspring = Util.crossover(parentA, parentB);
 
                     //maybe mutate offspring, depending on stochastic assessment
                     offspring = Util.mutate(offspring, mutationRate);
                     if (KnapsackGenetic.survive(offspring)) {
-                        newPop[nextIndex] = offspring;
+                        newPop.set(nextIndex, offspring);
                         nextIndex++;
                     }
                 }
             }
 
+            //System.out.print(population == newPop);
+            population = newPop;
+
             //display the value of the current best chromosome
-            System.out.println(sortedPop[0]);
+            String solution = new String();
+            for (Object i: sortedPop.get(0)){
+                solution += (int) i;
+            }
+
+            System.out.println(solution);
+            solution = "";
+
 
             //index the number of passed generations
             genCount++;
