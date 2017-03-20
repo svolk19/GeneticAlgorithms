@@ -31,7 +31,7 @@ public class BinaryGeneticAlgorithm {
 
         //GA body
         while (genCount < generations){
-
+            
             //following elitism, copy the most fit individuals into the new population
             int[][] sortedPop = KnapsackGenetic.fitness(population);
             for (int i = 0; i < elitism; i ++){
@@ -59,13 +59,15 @@ public class BinaryGeneticAlgorithm {
 
                     //maybe mutate offspring, depending on stochastic assessment
                     offspring = Util.mutate(offspring, mutationRate);
-                    newPop[nextIndex] = offspring;
-                    nextIndex ++;
+                    if (KnapsackGenetic.survive(offspring)) {
+                        newPop[nextIndex] = offspring;
+                        nextIndex++;
+                    }
                 }
             }
 
             //display the value of the current best chromosome
-            System.out.println(KnapsackGenetic.getTotalValue(sortedPop[0]));
+            System.out.println(sortedPop[0]);
 
             //index the number of passed generations
             genCount++;

@@ -12,13 +12,17 @@ public class KnapsackGenetic {
 
     static final int chromLength = 15;
 
-    public static final int[] solution = {1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1};
+    public static final int[] solutionChrom = {1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1};
+
+    public static final int solutionValue = 1458;
+
+    public static final int solutionWeight = 749;
 
     private static final int[] weights = {70, 73, 77, 80, 82, 87, 90, 94, 98, 106, 110, 113, 115, 118, 120};
 
     private static final int[] profits = {135, 139, 149, 150, 156, 163, 173, 184, 192, 201, 210, 214, 221, 229, 240};
 
-    private static int getTotalWeight(int[] chrom){
+    public static int getTotalWeight(int[] chrom){
         //the total weight of the chromosome representation of a knapsack solution
         int chromWeightTotal = 0;
 
@@ -49,8 +53,6 @@ public class KnapsackGenetic {
 
         int[][] valueList = new int[population.length][2];
 
-        System.out.println("here: 1");
-
         for (int i = 0; i < population.length; i++){
             if (getTotalWeight(population[i]) > weightCapacity){
                 valueList[i][0] = -1;
@@ -64,9 +66,9 @@ public class KnapsackGenetic {
         //indicates whether an element has been switched
         boolean switchFlag = true;
 
-        System.out.println("here: 2");
         //sorts the values by switching elements
         while (true) {
+            switchFlag = true;
             for (int i = 0; i < valueList.length - 1; i++) {
                 if (valueList[i][0] < valueList[i + 1][0]) {
                     switchFlag = false;
@@ -85,7 +87,6 @@ public class KnapsackGenetic {
         //final sorted chrom list
         int[][] ratedPopList = new int[population.length][chromLength];
 
-        System.out.println("here: 3");
         //assignes sorted value indexes to chromosomes and places them in final sorted chrom
         for (int i = 0; i < valueList.length; i++){
             ratedPopList[i] = population[valueList[i][1]];
@@ -93,6 +94,10 @@ public class KnapsackGenetic {
 
         return ratedPopList;
 
+    }
+
+    static boolean survive(int[] chrom){
+            return getTotalWeight(chrom) > weightCapacity;
     }
 
     static ArrayList<ArrayList> getScaledFitnesses(int[][] population){
