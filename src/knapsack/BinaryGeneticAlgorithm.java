@@ -27,15 +27,15 @@ public class BinaryGeneticAlgorithm {
         //define initial population
         ArrayList<ArrayList> population = Util.generateRandomPop(popSize, chromLength);
 
-        //for debugging
-        for (ArrayList i: population){
-            for (Object j: i){
-                String chromString = "";
-                chromString += (int) j;
-                System.out.println(chromString);
-
-            }
-        }
+//        //for debugging
+//        for (ArrayList i: population){
+//            for (Object j: i){
+//                String chromString = "";
+//                chromString += (int) j;
+//                System.out.println(chromString);
+//
+//            }
+//        }
 
         ArrayList<ArrayList> newPop = new ArrayList<>();
         int genCount = 0;

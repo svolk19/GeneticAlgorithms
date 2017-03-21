@@ -22,15 +22,15 @@ class Util {
 
         Random rand = new Random();
         ArrayList<ArrayList> population = new ArrayList<>();
-        ArrayList chrom = new ArrayList();
+
 
         for (int i = 0; i < popSize; i++){
+            ArrayList chrom = new ArrayList();
             for (int j = 0; j < chromLength; j++){
                 chrom.add(rand.nextInt(2));
             }
 
             population.add(chrom);
-            chrom.clear();
         }
 
         return population;
