@@ -114,14 +114,22 @@ public class KnapsackGenetic {
         int totalPopValue = 0;
         int chromValue;
 
+
         for (int i = 0; i < population.size(); i++){
             if (getTotalWeight(population.get(i)) <= weightCapacity){
                 chromValue = getTotalValue(population.get(i));
                 valueListElement.add(chromValue);
                 valueListElement.add(i);
                 totalPopValue += chromValue;
+                valueList.add(valueListElement);
             }
         }
+
+        //for debugging
+        for(ArrayList i: valueList){
+            System.out.println((int) i.get(0));
+        }
+
 
         ArrayList<ArrayList> scaledFitnesses = new ArrayList();
         ArrayList scaledFitnessElement = new ArrayList();
@@ -130,6 +138,7 @@ public class KnapsackGenetic {
             if ( ! valueList.get(i).get(0).equals(-1)){
                 scaledFitnessElement.add((double) valueList.get(i).get(0) / (double) totalPopValue);
                 scaledFitnessElement.add(valueList.get(i).get(1));
+                scaledFitnesses.add(scaledFitnessElement);
             }
         }
 

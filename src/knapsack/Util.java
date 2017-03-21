@@ -30,6 +30,7 @@ class Util {
             }
 
             population.add(chrom);
+            chrom.clear();
         }
 
         return population;

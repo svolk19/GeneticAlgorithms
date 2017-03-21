@@ -16,10 +16,6 @@ public class BinaryGeneticAlgorithm {
     private static final double crossRate = 0.5;
     private static final double mutationRate = 0.1;
 
-
-    //define population
-    private static ArrayList<ArrayList> population = Util.generateRandomPop(popSize, chromLength);
-
     //define main
     public static void main(String[] args){
         runGeneticAlgorithm();
@@ -27,6 +23,19 @@ public class BinaryGeneticAlgorithm {
 
     //GA body method
     private static void runGeneticAlgorithm(){
+
+        //define initial population
+        ArrayList<ArrayList> population = Util.generateRandomPop(popSize, chromLength);
+
+        //for debugging
+        for (ArrayList i: population){
+            for (Object j: i){
+                String chromString = "";
+                chromString += (int) j;
+                System.out.println(chromString);
+
+            }
+        }
 
         ArrayList<ArrayList> newPop = new ArrayList<>();
         int genCount = 0;
@@ -68,17 +77,21 @@ public class BinaryGeneticAlgorithm {
                 }
             }
 
-            //System.out.print(population == newPop);
             population = newPop;
 
             //display the value of the current best chromosome
-            String solution = new String();
-            for (Object i: sortedPop.get(0)){
-                solution += (int) i;
+            for (int j = 0; j < 50; j++){
+                String solution = new String();
+                for (Object i: sortedPop.get(j)){
+                    solution += (int) i;
+                }
+
+                System.out.println(solution);
+                solution = "";
+
+
             }
 
-            System.out.println(solution);
-            solution = "";
 
 
             //index the number of passed generations
