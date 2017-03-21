@@ -125,18 +125,12 @@ public class KnapsackGenetic {
             }
         }
 
-        //for debugging
-        for(ArrayList i: valueList){
-            System.out.println((int) i.get(0));
-        }
-
-
         ArrayList<ArrayList> scaledFitnesses = new ArrayList();
         ArrayList scaledFitnessElement = new ArrayList();
 
         for (int i = 0; i < valueList.size(); i++){
             if ( ! valueList.get(i).get(0).equals(-1)){
-                scaledFitnessElement.add((double) valueList.get(i).get(0) / (double) totalPopValue);
+                scaledFitnessElement.add((double) (int) valueList.get(i).get(0) / totalPopValue);
                 scaledFitnessElement.add(valueList.get(i).get(1));
                 scaledFitnesses.add(scaledFitnessElement);
             }
@@ -144,6 +138,23 @@ public class KnapsackGenetic {
 
         return scaledFitnesses;
 
+    }
+
+    public static void printChrom(ArrayList chrom){
+
+        String chromString = "";
+        for (Object i: chrom){
+            chromString += (int) i;
+        }
+
+        System.out.println(chromString);
+
+    }
+
+    public static void printPop(ArrayList<ArrayList> population){
+        for (ArrayList i: population){
+            printChrom(i);
+        }
     }
 
 

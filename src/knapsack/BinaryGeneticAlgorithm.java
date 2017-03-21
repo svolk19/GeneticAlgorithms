@@ -54,6 +54,8 @@ public class BinaryGeneticAlgorithm {
 
             //cross until new population is full
             while (newPop.size() != popSize){
+                System.out.println("here");
+
 
                 //select two parents via roulette wheel
                 ArrayList parentA = population.get(Util.rouletteSelection(KnapsackGenetic.getScaledFitnesses(population)));
