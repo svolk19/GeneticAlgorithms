@@ -124,10 +124,7 @@ public class KnapsackGenetic {
 
     static ArrayList<ArrayList> getScaledFitnesses(ArrayList<ArrayList> population){
 
-        //bug: scaled fitnesses are identical
-
         ArrayList<ArrayList> valueList = new ArrayList<>();
-        ArrayList valueListElement = new ArrayList();
 
         int totalPopValue = 0;
         int chromValue;
@@ -135,6 +132,8 @@ public class KnapsackGenetic {
 
         for (int i = 0; i < population.size(); i++){
             if (getTotalWeight(population.get(i)) <= weightCapacity){
+
+                ArrayList valueListElement = new ArrayList();
                 chromValue = getTotalValue(population.get(i));
                 valueListElement.add(chromValue);
                 valueListElement.add(i);
@@ -144,10 +143,11 @@ public class KnapsackGenetic {
         }
 
         ArrayList<ArrayList> scaledFitnesses = new ArrayList();
-        ArrayList scaledFitnessElement = new ArrayList();
 
         for (int i = 0; i < valueList.size(); i++){
             if ( ! valueList.get(i).get(0).equals(-1)){
+
+                ArrayList scaledFitnessElement = new ArrayList();
                 scaledFitnessElement.add((double) (int) valueList.get(i).get(0) / totalPopValue);
                 scaledFitnessElement.add(valueList.get(i).get(1));
                 scaledFitnesses.add(scaledFitnessElement);

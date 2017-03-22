@@ -73,14 +73,6 @@ class Util {
     //generates an item index randomly, higher value items having a higher probability of selection
     static int rouletteSelection(ArrayList<ArrayList> scaledValueList){
 
-        //Bug: values of roulette wheel are exceeding one
-
-
-        //for debugging
-//        for (int i = 0; i < scaledValueList.size(); i++){
-//            System.out.println(scaledValueList.get(i).get(0));
-//        }
-
         //define roulette wheel
         double[][] wheel = new double[scaledValueList.size()][2];
 
@@ -92,12 +84,6 @@ class Util {
             wheel[i][1] = endingPlace;
             startingPlace = endingPlace;
         }
-
-        //for debugging
-//        for (int i = 0; i < wheel.length; i++){
-//            System.out.println(wheel[i][0]);
-//            System.out.println(wheel[i][1]);
-//        }
 
         double randChoice = getRandom();
         int valueIndex = 0;
