@@ -5,7 +5,6 @@
 package knapsack;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Random;
 
 class Util {
@@ -74,6 +73,7 @@ class Util {
     //generates an item index randomly, higher value items having a higher probability of selection
     static int rouletteSelection(ArrayList<ArrayList> scaledValueList){
 
+
         //define roulette wheel
         double[][] wheel = new double[scaledValueList.size()][2];
 
@@ -95,6 +95,20 @@ class Util {
                 valueIndex = i;
             }
         }
+
+//        for (int i = 0; i < wheel.length; i++) {
+//            System.out.println(wheel[i][0]);
+//            System.out.println(wheel[i][1]);
+//        }
+
+
+
+//        for (int i = 0; i < scaledValueList.size(); i++) {
+//            System.out.println(scaledValueList.get(i).get(0));
+//        }
+//
+//        System.out.println("finished with list");
+
 
         return (int) scaledValueList.get(valueIndex).get(1);
     }

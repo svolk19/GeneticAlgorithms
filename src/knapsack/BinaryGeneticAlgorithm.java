@@ -13,7 +13,7 @@ public class BinaryGeneticAlgorithm {
     private static final int chromLength = KnapsackGenetic.chromLength;
     private static final int generations = 1000;
     private static final int elitism = 3;
-    private static final double crossRate = 0.5;
+    private static final double crossRate = 1.0;
     private static final double mutationRate = 0.1;
 
     //define main
@@ -26,20 +26,18 @@ public class BinaryGeneticAlgorithm {
 
         //define initial population
         ArrayList<ArrayList> population = Util.generateRandomPop(popSize, chromLength);
-        ArrayList<ArrayList> newPop = new ArrayList<>();
         int genCount = 0;
 
         //GA body
         while (genCount < generations){
+            
+            ArrayList<ArrayList> newPop = new ArrayList<>();
 
             //following elitism, copy the most fit individuals into the new population
             ArrayList<ArrayList> sortedPop = KnapsackGenetic.fitness(population);
             for (int i = 0; i < elitism; i ++){
-                newPop.add(i, sortedPop.get(i));
+                newPop.add(sortedPop.get(i));
             }
-
-            //for adding to the end of the new population later
-            int nextIndex = elitism;
 
             //cross until new population is full
             while (newPop.size() != popSize){
@@ -62,8 +60,8 @@ public class BinaryGeneticAlgorithm {
                     offspring = Util.mutate(offspring, mutationRate);
                     if (KnapsackGenetic.survive(offspring)) {
                         newPop.add(offspring);
-                        nextIndex++;
                     }
+
                 }
             }
 
@@ -73,9 +71,15 @@ public class BinaryGeneticAlgorithm {
             //index the number of passed generations
             genCount++;
 
-            KnapsackGenetic.printChrom(KnapsackGenetic.fitness(population).get(0));
-
         }
+
+        //display the final solution
+        ArrayList solutionChrom = KnapsackGenetic.fitness(population).get(0);
+        System.out.println("***Solution generated***");
+        System.out.printf("Greatest possible value: %d%n", KnapsackGenetic.getTotalValue(solutionChrom));
+        System.out.printf("Solution weight: %d%n", KnapsackGenetic.getTotalWeight(solutionChrom));
+        System.out.printf("Best chromosome: %s%n", KnapsackGenetic.chromToString(solutionChrom));
+
     }
 }
 

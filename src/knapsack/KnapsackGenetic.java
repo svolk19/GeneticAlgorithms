@@ -4,6 +4,7 @@
 
 package knapsack;
 
+import javax.net.ssl.SSLContext;
 import java.util.ArrayList;
 
 public class KnapsackGenetic {
@@ -35,7 +36,7 @@ public class KnapsackGenetic {
         return chromWeightTotal;
     }
 
-    private static int getTotalValue(ArrayList chrom){
+    public static int getTotalValue(ArrayList chrom){
 
         //the total value of the chromosome representation of a knapsack solution
         int chromValueTotal = 0;
@@ -66,17 +67,27 @@ public class KnapsackGenetic {
         }
     }
 
+    public static String chromToString(ArrayList chrom){
+
+        String chromString = new String();
+        for (Object i: chrom){
+            chromString += (int) i;
+        }
+
+        return chromString;
+    }
+
     static boolean survive(ArrayList chrom){
-        return getTotalWeight(chrom) > weightCapacity;
+        return getTotalWeight(chrom) <= weightCapacity;
     }
 
     static ArrayList<ArrayList> fitness(ArrayList<ArrayList> population){
 
         //used to rank and store ranked values of population
         ArrayList<ArrayList> valueList = new ArrayList<>();
-        ArrayList valueListElement = new ArrayList();
 
         for (int i = 0; i < population.size(); i++){
+            ArrayList valueListElement = new ArrayList();
             if (getTotalWeight(population.get(i)) > weightCapacity){
                 valueListElement.add(-1);
                 valueListElement.add(i);
@@ -85,7 +96,6 @@ public class KnapsackGenetic {
                 valueListElement.add(getTotalValue(population.get(i)));
                 valueListElement.add(i);
                 valueList.add(valueListElement);
-
             }
         }
 
@@ -111,7 +121,7 @@ public class KnapsackGenetic {
         }
 
         //final sorted chrom list
-        ArrayList ratedPopList = new ArrayList<>();
+        ArrayList<ArrayList> ratedPopList = new ArrayList<>();
 
         //assignes sorted value indexes to chromosomes and places them in final sorted chrom
         for (int i = 0; i < valueList.size(); i++){
@@ -129,10 +139,8 @@ public class KnapsackGenetic {
         int totalPopValue = 0;
         int chromValue;
 
-
         for (int i = 0; i < population.size(); i++){
             if (getTotalWeight(population.get(i)) <= weightCapacity){
-
                 ArrayList valueListElement = new ArrayList();
                 chromValue = getTotalValue(population.get(i));
                 valueListElement.add(chromValue);
