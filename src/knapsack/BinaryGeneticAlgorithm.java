@@ -26,17 +26,6 @@ public class BinaryGeneticAlgorithm {
 
         //define initial population
         ArrayList<ArrayList> population = Util.generateRandomPop(popSize, chromLength);
-
-//        //for debugging
-//        for (ArrayList i: population){
-//            for (Object j: i){
-//                String chromString = "";
-//                chromString += (int) j;
-//                System.out.println(chromString);
-//
-//            }
-//        }
-
         ArrayList<ArrayList> newPop = new ArrayList<>();
         int genCount = 0;
 
@@ -54,12 +43,11 @@ public class BinaryGeneticAlgorithm {
 
             //cross until new population is full
             while (newPop.size() != popSize){
-                System.out.println("here");
-
 
                 //select two parents via roulette wheel
                 ArrayList parentA = population.get(Util.rouletteSelection(KnapsackGenetic.getScaledFitnesses(population)));
                 ArrayList parentB = population.get(Util.rouletteSelection(KnapsackGenetic.getScaledFitnesses(population)));
+
 
                 //if parents are the same, try again
                 if (parentA.equals(parentB)){
@@ -68,6 +56,7 @@ public class BinaryGeneticAlgorithm {
 
                 //maybe cross two parents, evaluated stochastically via roulette wheel selection
                 if (Util.getRandom() < crossRate){
+
                     ArrayList offspring = Util.crossover(parentA, parentB);
 
                     //maybe mutate offspring, depending on stochastic assessment
@@ -79,26 +68,14 @@ public class BinaryGeneticAlgorithm {
                 }
             }
 
+            //reset the current generation as the one just created
             population = newPop;
-
-            //display the value of the current best chromosome
-            for (int j = 0; j < 50; j++){
-                String solution = new String();
-                for (Object i: sortedPop.get(j)){
-                    solution += (int) i;
-                }
-
-                System.out.println(solution);
-                solution = "";
-
-
-            }
-
-
 
             //index the number of passed generations
             genCount++;
+
         }
     }
-
 }
+
+

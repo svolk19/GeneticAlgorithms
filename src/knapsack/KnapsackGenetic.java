@@ -49,6 +49,27 @@ public class KnapsackGenetic {
         return chromValueTotal;
     }
 
+    public static void printChrom(ArrayList chrom){
+
+        String chromString = "";
+        for (Object i: chrom){
+            chromString += (int) i;
+        }
+
+        System.out.println(chromString);
+
+    }
+
+    public static void printPop(ArrayList<ArrayList> population){
+        for (ArrayList i: population){
+            printChrom(i);
+        }
+    }
+
+    static boolean survive(ArrayList chrom){
+        return getTotalWeight(chrom) > weightCapacity;
+    }
+
     static ArrayList<ArrayList> fitness(ArrayList<ArrayList> population){
 
         //used to rank and store ranked values of population
@@ -101,12 +122,9 @@ public class KnapsackGenetic {
 
     }
 
-    static boolean survive(ArrayList chrom){
-            return getTotalWeight(chrom) > weightCapacity;
-    }
-
     static ArrayList<ArrayList> getScaledFitnesses(ArrayList<ArrayList> population){
 
+        //bug: scaled fitnesses are identical
 
         ArrayList<ArrayList> valueList = new ArrayList<>();
         ArrayList valueListElement = new ArrayList();
@@ -139,24 +157,6 @@ public class KnapsackGenetic {
         return scaledFitnesses;
 
     }
-
-    public static void printChrom(ArrayList chrom){
-
-        String chromString = "";
-        for (Object i: chrom){
-            chromString += (int) i;
-        }
-
-        System.out.println(chromString);
-
-    }
-
-    public static void printPop(ArrayList<ArrayList> population){
-        for (ArrayList i: population){
-            printChrom(i);
-        }
-    }
-
 
 }
 
