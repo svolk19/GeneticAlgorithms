@@ -48,7 +48,6 @@ public class BinaryGeneticAlgorithm {
                 ArrayList parentA = population.get(Util.rouletteSelection(KnapsackGenetic.getScaledFitnesses(population)));
                 ArrayList parentB = population.get(Util.rouletteSelection(KnapsackGenetic.getScaledFitnesses(population)));
 
-
                 //if parents are the same, try again
                 if (parentA.equals(parentB)){
                     continue;
@@ -62,7 +61,7 @@ public class BinaryGeneticAlgorithm {
                     //maybe mutate offspring, depending on stochastic assessment
                     offspring = Util.mutate(offspring, mutationRate);
                     if (KnapsackGenetic.survive(offspring)) {
-                        newPop.set(nextIndex, offspring);
+                        newPop.add(offspring);
                         nextIndex++;
                     }
                 }
@@ -73,6 +72,8 @@ public class BinaryGeneticAlgorithm {
 
             //index the number of passed generations
             genCount++;
+
+            KnapsackGenetic.printChrom(KnapsackGenetic.fitness(population).get(0));
 
         }
     }

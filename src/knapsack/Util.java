@@ -5,6 +5,7 @@
 package knapsack;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 class Util {
@@ -44,10 +45,10 @@ class Util {
         ArrayList offspring = new ArrayList();
         int crossLocation =  rand.nextInt(parentA.size());
         for (int i = 0; i < crossLocation; i++){
-            offspring.set(i, parentA.get(i));
+            offspring.add(parentA.get(i));
         }
         for (int i = crossLocation; i < parentA.size(); i++){
-            offspring.set(i, parentB.get(i));
+            offspring.add(parentB.get(i));
         }
 
         return offspring;

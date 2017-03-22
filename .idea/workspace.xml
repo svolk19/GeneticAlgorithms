@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fa144fa9-d9e6-457f-b580-f3863bbf5556" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/genetic_algorithms/knapsack/BinaryGeneticAlgorithm.class" afterPath="$PROJECT_DIR$/out/production/genetic_algorithms/knapsack/BinaryGeneticAlgorithm.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/genetic_algorithms/knapsack/KnapsackGenetic.class" afterPath="$PROJECT_DIR$/out/production/genetic_algorithms/knapsack/KnapsackGenetic.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/genetic_algorithms/knapsack/Util.class" afterPath="$PROJECT_DIR$/out/production/genetic_algorithms/knapsack/Util.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/knapsack/KnapsackGenetic.java" afterPath="$PROJECT_DIR$/src/knapsack/KnapsackGenetic.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/knapsack/BinaryGeneticAlgorithm.java" afterPath="$PROJECT_DIR$/src/knapsack/BinaryGeneticAlgorithm.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/knapsack/Util.java" afterPath="$PROJECT_DIR$/src/knapsack/Util.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -26,8 +22,8 @@
       <file leaf-file-name="KnapsackGenetic.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/knapsack/KnapsackGenetic.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="26">
-              <caret line="51" column="28" lean-forward="false" selection-start-line="51" selection-start-column="23" selection-end-line="51" selection-end-column="28" />
+            <state relative-caret-position="462">
+              <caret line="72" column="42" lean-forward="false" selection-start-line="72" selection-start-column="42" selection-end-line="72" selection-end-column="42" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="method#getTotalWeight#0;class#KnapsackGenetic#0" expanded="false" />
@@ -35,16 +31,17 @@
                 <element signature="method#printChrom#0;class#KnapsackGenetic#0" expanded="false" />
                 <element signature="method#printPop#0;class#KnapsackGenetic#0" expanded="false" />
                 <element signature="method#fitness#0;class#KnapsackGenetic#0" expanded="false" />
+                <element signature="method#getScaledFitnesses#0;class#KnapsackGenetic#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BinaryGeneticAlgorithm.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="BinaryGeneticAlgorithm.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/knapsack/BinaryGeneticAlgorithm.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="65" column="36" lean-forward="false" selection-start-line="65" selection-start-column="36" selection-end-line="65" selection-end-column="36" />
+            <state relative-caret-position="1150">
+              <caret line="74" column="0" lean-forward="false" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="e#538#539#0" expanded="true" />
@@ -54,19 +51,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Util.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Util.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/knapsack/Util.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="485">
-              <caret line="73" column="70" lean-forward="false" selection-start-line="73" selection-start-column="70" selection-end-line="73" selection-end-column="70" />
+            <state relative-caret-position="404">
+              <caret line="96" column="9" lean-forward="false" selection-start-line="96" selection-start-column="9" selection-end-line="96" selection-end-column="9" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="imports" expanded="true" />
                 <element signature="method#getRandom#0;class#Util#0" expanded="false" />
                 <element signature="method#generateRandomPop#0;class#Util#0" expanded="false" />
-                <element signature="method#crossover#0;class#Util#0" expanded="false" />
                 <element signature="method#mutate#0;class#Util#0" expanded="false" />
-                <element signature="method#rouletteSelection#0;class#Util#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -98,8 +93,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/knapsack/knapsackGenetic.java" />
-        <option value="$PROJECT_DIR$/src/knapsack/BinaryGeneticAlgorithm.java" />
         <option value="$PROJECT_DIR$/src/knapsack/KnapsackGenetic.java" />
+        <option value="$PROJECT_DIR$/src/knapsack/BinaryGeneticAlgorithm.java" />
         <option value="$PROJECT_DIR$/src/knapsack/Util.java" />
       </list>
     </option>
@@ -432,7 +427,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32917705" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32702237" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32702237" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -510,6 +505,7 @@
             <element signature="method#printChrom#0;class#KnapsackGenetic#0" expanded="false" />
             <element signature="method#printPop#0;class#KnapsackGenetic#0" expanded="false" />
             <element signature="method#fitness#0;class#KnapsackGenetic#0" expanded="false" />
+            <element signature="method#getScaledFitnesses#0;class#KnapsackGenetic#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -535,9 +531,7 @@
             <element signature="imports" expanded="true" />
             <element signature="method#getRandom#0;class#Util#0" expanded="false" />
             <element signature="method#generateRandomPop#0;class#Util#0" expanded="false" />
-            <element signature="method#crossover#0;class#Util#0" expanded="false" />
             <element signature="method#mutate#0;class#Util#0" expanded="false" />
-            <element signature="method#rouletteSelection#0;class#Util#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -553,6 +547,7 @@
             <element signature="method#printChrom#0;class#KnapsackGenetic#0" expanded="false" />
             <element signature="method#printPop#0;class#KnapsackGenetic#0" expanded="false" />
             <element signature="method#fitness#0;class#KnapsackGenetic#0" expanded="false" />
+            <element signature="method#getScaledFitnesses#0;class#KnapsackGenetic#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -578,30 +573,16 @@
             <element signature="imports" expanded="true" />
             <element signature="method#getRandom#0;class#Util#0" expanded="false" />
             <element signature="method#generateRandomPop#0;class#Util#0" expanded="false" />
-            <element signature="method#crossover#0;class#Util#0" expanded="false" />
             <element signature="method#mutate#0;class#Util#0" expanded="false" />
-            <element signature="method#rouletteSelection#0;class#Util#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/knapsack/specifications.txt" />
-    <entry file="file://$PROJECT_DIR$/src/knapsack/BinaryGeneticAlgorithm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="65" column="36" lean-forward="false" selection-start-line="65" selection-start-column="36" selection-end-line="65" selection-end-column="36" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#538#539#0" expanded="true" />
-            <element signature="e#575#576#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/knapsack/KnapsackGenetic.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="26">
-          <caret line="51" column="28" lean-forward="false" selection-start-line="51" selection-start-column="23" selection-end-line="51" selection-end-column="28" />
+        <state relative-caret-position="462">
+          <caret line="72" column="42" lean-forward="false" selection-start-line="72" selection-start-column="42" selection-end-line="72" selection-end-column="42" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="method#getTotalWeight#0;class#KnapsackGenetic#0" expanded="false" />
@@ -609,22 +590,33 @@
             <element signature="method#printChrom#0;class#KnapsackGenetic#0" expanded="false" />
             <element signature="method#printPop#0;class#KnapsackGenetic#0" expanded="false" />
             <element signature="method#fitness#0;class#KnapsackGenetic#0" expanded="false" />
+            <element signature="method#getScaledFitnesses#0;class#KnapsackGenetic#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/knapsack/Util.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="485">
-          <caret line="73" column="70" lean-forward="false" selection-start-line="73" selection-start-column="70" selection-end-line="73" selection-end-column="70" />
+        <state relative-caret-position="404">
+          <caret line="96" column="9" lean-forward="false" selection-start-line="96" selection-start-column="9" selection-end-line="96" selection-end-column="9" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
             <element signature="method#getRandom#0;class#Util#0" expanded="false" />
             <element signature="method#generateRandomPop#0;class#Util#0" expanded="false" />
-            <element signature="method#crossover#0;class#Util#0" expanded="false" />
             <element signature="method#mutate#0;class#Util#0" expanded="false" />
-            <element signature="method#rouletteSelection#0;class#Util#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/knapsack/BinaryGeneticAlgorithm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1150">
+          <caret line="74" column="0" lean-forward="false" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#538#539#0" expanded="true" />
+            <element signature="e#575#576#0" expanded="true" />
           </folding>
         </state>
       </provider>
