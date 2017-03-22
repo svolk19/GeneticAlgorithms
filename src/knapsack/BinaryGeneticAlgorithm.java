@@ -1,4 +1,4 @@
-/**
+/*
  * Created by sam on 3/16/2017.
  */
 
@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class BinaryGeneticAlgorithm {
 
     //define genetic algorithm parameters
+    private static final boolean printValues = true;
     private static final int popSize = 50;
     private static final int chromLength = KnapsackGenetic.chromLength;
     private static final int generations = 1000;
@@ -30,7 +31,7 @@ public class BinaryGeneticAlgorithm {
 
         //GA body
         while (genCount < generations){
-            
+
             ArrayList<ArrayList> newPop = new ArrayList<>();
 
             //following elitism, copy the most fit individuals into the new population
@@ -63,6 +64,10 @@ public class BinaryGeneticAlgorithm {
                     }
 
                 }
+            }
+
+            if (printValues){
+                System.out.println(KnapsackGenetic.getTotalValue(KnapsackGenetic.fitness(population).get(0)));
             }
 
             //reset the current generation as the one just created

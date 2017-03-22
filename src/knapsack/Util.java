@@ -1,4 +1,4 @@
-/**
+/*
  * Created by sam on 3/16/2017.
  */
 
@@ -25,7 +25,7 @@ class Util {
 
 
         for (int i = 0; i < popSize; i++){
-            ArrayList chrom = new ArrayList();
+            ArrayList<Integer> chrom = new ArrayList<>();
             for (int j = 0; j < chromLength; j++){
                 chrom.add(rand.nextInt(2));
             }
@@ -40,14 +40,14 @@ class Util {
     static ArrayList crossover(ArrayList parentA, ArrayList parentB){
 
         Random rand = new Random();
-
-        ArrayList offspring = new ArrayList();
         int crossLocation =  rand.nextInt(parentA.size());
+        ArrayList<Integer> offspring = new ArrayList<>();
+
         for (int i = 0; i < crossLocation; i++){
-            offspring.add(parentA.get(i));
+            offspring.add((int) parentA.get(i));
         }
         for (int i = crossLocation; i < parentA.size(); i++){
-            offspring.add(parentB.get(i));
+            offspring.add((int) parentB.get(i));
         }
 
         return offspring;
@@ -55,7 +55,7 @@ class Util {
     }
 
     //applies mutation to new offspring
-    static ArrayList mutate(ArrayList offspring, double mutationRate){
+    static ArrayList<Integer> mutate(ArrayList<Integer> offspring, double mutationRate){
 
         for (int i = 0; i < offspring.size(); i++){
             if (getRandom() < mutationRate){
@@ -95,20 +95,6 @@ class Util {
                 valueIndex = i;
             }
         }
-
-//        for (int i = 0; i < wheel.length; i++) {
-//            System.out.println(wheel[i][0]);
-//            System.out.println(wheel[i][1]);
-//        }
-
-
-
-//        for (int i = 0; i < scaledValueList.size(); i++) {
-//            System.out.println(scaledValueList.get(i).get(0));
-//        }
-//
-//        System.out.println("finished with list");
-
 
         return (int) scaledValueList.get(valueIndex).get(1);
     }

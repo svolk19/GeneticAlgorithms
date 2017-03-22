@@ -1,29 +1,28 @@
-/**
+/*
  * Created by sam on 3/6/2017.
  */
 
 package knapsack;
 
-import javax.net.ssl.SSLContext;
 import java.util.ArrayList;
 
-public class KnapsackGenetic {
+class KnapsackGenetic {
+    /*
+    Knapsack problem data set
+    solution chromosome: {1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1}
+    solution value: 1458
+    solution weight: 749
+     */
 
     private static final int weightCapacity = 750;
 
     static final int chromLength = 15;
 
-    public static final int[] solutionChrom = {1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1};
-
-    public static final int solutionValue = 1458;
-
-    public static final int solutionWeight = 749;
-
     private static final int[] weights = {70, 73, 77, 80, 82, 87, 90, 94, 98, 106, 110, 113, 115, 118, 120};
 
     private static final int[] profits = {135, 139, 149, 150, 156, 163, 173, 184, 192, 201, 210, 214, 221, 229, 240};
 
-    public static int getTotalWeight(ArrayList chrom){
+    static int getTotalWeight(ArrayList chrom){
         //the total weight of the chromosome representation of a knapsack solution
         int chromWeightTotal = 0;
 
@@ -36,7 +35,7 @@ public class KnapsackGenetic {
         return chromWeightTotal;
     }
 
-    public static int getTotalValue(ArrayList chrom){
+    static int getTotalValue(ArrayList chrom){
 
         //the total value of the chromosome representation of a knapsack solution
         int chromValueTotal = 0;
@@ -50,26 +49,9 @@ public class KnapsackGenetic {
         return chromValueTotal;
     }
 
-    public static void printChrom(ArrayList chrom){
+    static String chromToString(ArrayList chrom){
 
         String chromString = "";
-        for (Object i: chrom){
-            chromString += (int) i;
-        }
-
-        System.out.println(chromString);
-
-    }
-
-    public static void printPop(ArrayList<ArrayList> population){
-        for (ArrayList i: population){
-            printChrom(i);
-        }
-    }
-
-    public static String chromToString(ArrayList chrom){
-
-        String chromString = new String();
         for (Object i: chrom){
             chromString += (int) i;
         }
@@ -87,7 +69,7 @@ public class KnapsackGenetic {
         ArrayList<ArrayList> valueList = new ArrayList<>();
 
         for (int i = 0; i < population.size(); i++){
-            ArrayList valueListElement = new ArrayList();
+            ArrayList<Integer> valueListElement = new ArrayList<>();
             if (getTotalWeight(population.get(i)) > weightCapacity){
                 valueListElement.add(-1);
                 valueListElement.add(i);
@@ -124,8 +106,8 @@ public class KnapsackGenetic {
         ArrayList<ArrayList> ratedPopList = new ArrayList<>();
 
         //assignes sorted value indexes to chromosomes and places them in final sorted chrom
-        for (int i = 0; i < valueList.size(); i++){
-            ratedPopList.add(population.get((int) valueList.get(i).get(1)));
+        for (ArrayList i: valueList){
+            ratedPopList.add(population.get((int) i.get(1)));
         }
 
         return ratedPopList;
@@ -141,7 +123,7 @@ public class KnapsackGenetic {
 
         for (int i = 0; i < population.size(); i++){
             if (getTotalWeight(population.get(i)) <= weightCapacity){
-                ArrayList valueListElement = new ArrayList();
+                ArrayList<Integer> valueListElement = new ArrayList<>();
                 chromValue = getTotalValue(population.get(i));
                 valueListElement.add(chromValue);
                 valueListElement.add(i);
@@ -150,14 +132,13 @@ public class KnapsackGenetic {
             }
         }
 
-        ArrayList<ArrayList> scaledFitnesses = new ArrayList();
+        ArrayList<ArrayList> scaledFitnesses = new ArrayList<>();
 
-        for (int i = 0; i < valueList.size(); i++){
-            if ( ! valueList.get(i).get(0).equals(-1)){
-
+        for (ArrayList i: valueList){
+            if ( ! i.get(0).equals(-1)){
                 ArrayList scaledFitnessElement = new ArrayList();
-                scaledFitnessElement.add((double) (int) valueList.get(i).get(0) / totalPopValue);
-                scaledFitnessElement.add(valueList.get(i).get(1));
+                scaledFitnessElement.add((double) (int) i.get(0) / totalPopValue);
+                scaledFitnessElement.add(i.get(1));
                 scaledFitnesses.add(scaledFitnessElement);
             }
         }
