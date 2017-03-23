@@ -74,7 +74,10 @@ public class BinaryGeneticAlgorithm {
                         newPop.add(offspring);
                     }
                 }else{
-                    newPop.add(betterParent);
+                    ArrayList offspring = Util.mutate(betterParent, mutationRate);
+                    if (KnapsackGenetic.survive(offspring)){
+                        newPop.add(betterParent);
+                    }
                 }
             }
 
