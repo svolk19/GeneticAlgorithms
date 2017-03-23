@@ -4,6 +4,7 @@
 
 package knapsack;
 
+import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
 
 class KnapsackGenetic {
@@ -61,6 +62,46 @@ class KnapsackGenetic {
 
     static boolean survive(ArrayList chrom){
         return getTotalWeight(chrom) <= weightCapacity;
+    }
+
+    static ArrayList betterParent(ArrayList parentA, ArrayList parentB){
+
+        //get chromosome attributes for parents A and B
+        int aValue = getTotalValue(parentA);
+        int bValue = getTotalValue(parentB);
+        int aWeight = getTotalWeight(parentA);
+        int bWeight = getTotalWeight(parentB);
+
+        if (aWeight > weightCapacity){
+            aWeight = -1;
+        }
+
+        if (bWeight > weightCapacity){
+            bWeight = -1;
+        }
+
+        if (aWeight != -1 && bWeight != -1){
+            if (aValue > bValue){
+                return parentA;
+            }else{
+                return parentB;
+            }
+        }
+
+        if (aWeight == -1 && bWeight == -1){
+            if (aValue > bValue){
+                return parentA;
+            }else{
+                return parentB;
+            }
+        }
+
+        if (aWeight != -1){
+            return parentA;
+        }else{
+            return parentB;
+        }
+
     }
 
     static ArrayList<ArrayList> fitness(ArrayList<ArrayList> population){

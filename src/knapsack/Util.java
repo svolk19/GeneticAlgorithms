@@ -5,6 +5,7 @@
 package knapsack;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Random;
 
 class Util {
@@ -73,7 +74,6 @@ class Util {
     //generates an item index randomly, higher value items having a higher probability of selection
     static int rouletteSelection(ArrayList<ArrayList> scaledValueList){
 
-
         //define roulette wheel
         double[][] wheel = new double[scaledValueList.size()][2];
 
@@ -97,5 +97,45 @@ class Util {
         }
 
         return (int) scaledValueList.get(valueIndex).get(1);
+    }
+
+    static int rankSelection(ArrayList<ArrayList> scaledValueList){
+
+        int scaledTotal = 0;
+        for (int i = 1; i <= scaledValueList.size(); i++){
+            scaledTotal += i;
+        }
+
+        ArrayList<ArrayList> rankedValueList = new ArrayList<>();
+        for (int i = 0; i < scaledValueList.size(); i++){
+            ArrayList rankedValueListElement = new ArrayList();
+            rankedValueListElement.add((double) (scaledValueList.size() - i) / scaledTotal);
+            rankedValueListElement.add(scaledValueList.get(i).get(1));
+            rankedValueList.add(rankedValueListElement);
+        }
+
+        //define roulette wheel
+        double[][] wheel = new double[rankedValueList.size()][2];
+
+        double startingPlace = 0;
+        double endingPlace;
+        for (int i = 0; i < rankedValueList.size(); i++){
+            endingPlace = startingPlace + (double) rankedValueList.get(i).get(0);
+            wheel[i][0] = startingPlace;
+            wheel[i][1] = endingPlace;
+            startingPlace = endingPlace;
+        }
+
+        double randChoice = getRandom();
+        int valueIndex = 0;
+
+        for (int i = 0; i < wheel.length; i++){
+
+            if (randChoice >= wheel[i][0] && randChoice < wheel[i][1]){
+                valueIndex = i;
+            }
+        }
+
+        return (int) rankedValueList.get(valueIndex).get(1);
     }
 }

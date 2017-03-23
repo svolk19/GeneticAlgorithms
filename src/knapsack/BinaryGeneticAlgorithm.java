@@ -44,8 +44,18 @@ public class BinaryGeneticAlgorithm {
             while (newPop.size() != popSize){
 
                 //select two parents via roulette wheel
-                ArrayList parentA = population.get(Util.rouletteSelection(KnapsackGenetic.getScaledFitnesses(population)));
-                ArrayList parentB = population.get(Util.rouletteSelection(KnapsackGenetic.getScaledFitnesses(population)));
+                ArrayList parentA = population.get(Util.rankSelection(KnapsackGenetic.getScaledFitnesses(population)));
+                ArrayList parentB = population.get(Util.rankSelection(KnapsackGenetic.getScaledFitnesses(population)));
+
+                //which parent is better
+                ArrayList betterParent = KnapsackGenetic.betterParent(parentA, parentB);
+                ArrayList worseParent = new ArrayList();
+
+                if (betterParent == parentA){
+                    worseParent = parentB;
+                }else{
+                    worseParent = parentA;
+                }
 
                 //if parents are the same, try again
                 if (parentA.equals(parentB)){
@@ -55,14 +65,16 @@ public class BinaryGeneticAlgorithm {
                 //maybe cross two parents, evaluated stochastically via roulette wheel selection
                 if (Util.getRandom() < crossRate){
 
-                    ArrayList offspring = Util.crossover(parentA, parentB);
+                    //crossover to produce new offspring
+                    ArrayList offspring = Util.crossover(betterParent, worseParent);
 
                     //maybe mutate offspring, depending on stochastic assessment
                     offspring = Util.mutate(offspring, mutationRate);
                     if (KnapsackGenetic.survive(offspring)) {
                         newPop.add(offspring);
                     }
-
+                }else{
+                    newPop.add(betterParent);
                 }
             }
 
